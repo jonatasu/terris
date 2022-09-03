@@ -22,6 +22,7 @@
           v-for="item in items"
           :key="item.title"
           link
+          :to="item.to"
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -41,7 +42,7 @@
     </v-app-bar>
 
     <v-main>
-      <!--  -->
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -50,8 +51,8 @@
 export default {
   data: () => ({
     items: [
-      { title: 'Home', icon: 'mdi-map-search' },
-      // { title: 'Photos', icon: 'mdi-image' },
+      { title: 'Home', icon: 'mdi-map-search', to: '/' },
+      { title: 'Country', icon: 'mdi-map-marker-radius', to: '/country' },
       // { title: 'About', icon: 'mdi-help-box' },
     ],
     drawer: null,
