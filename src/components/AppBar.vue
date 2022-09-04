@@ -8,6 +8,7 @@
     :src="appBarFlagCountryDetails.flagImg"
     prominent
     loader-height="4"
+    extension-height="100"
   >
     <template v-slot:img="{ props }">
       <v-img
@@ -17,15 +18,21 @@
     </template>
 
     <v-toolbar-title
-      class="logo"
+      class="app-bar-logo-frame overflow-hidden rounded-xl pa-0"
       title="Go to homepage"
       @click="$router.push('/')"
     >
-      TERRIS
+      <img
+        :src="require($vuetify.theme.dark
+        ? '../assets/logo/DarkMode-AppBar.jpg'
+        : '../assets/logo/LightMode-AppBar.jpg')"
+        alt="TERRIS logo"
+        class="app-bar-logo"
+      />
     </v-toolbar-title>
 
-    <h2 class="title align-self-end pb-2 pl-4">
-      {{ appBarFlagCountryDetails.name }}
+    <h2 class="title align-self-end mb-2 pl-4">
+      {{ appBarFlagCountryDetails.flag }} {{ appBarFlagCountryDetails.name }}
     </h2>
 
     <v-spacer></v-spacer>
@@ -81,8 +88,29 @@ export default {
 </script>
 
 <style lang="scss">
-.logo {
+$logo-base-size: 80px;
+$logo-small-size: 45px;
+
+.app-bar-logo-frame {
   cursor: pointer;
+  height: $logo-base-size;
+  width: $logo-base-size;
+  transition: all .2s linear;
+
+  .app-bar-logo {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transition: all .2s linear;
+  }
+}
+.v-app-bar--is-scrolled {
+  .v-toolbar__title.app-bar-logo-frame {
+    height: $logo-small-size;
+    width: $logo-small-size;
+    margin-bottom: 2px;
+  }
 }
 .search-box {
   display: flex;
