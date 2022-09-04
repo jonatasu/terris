@@ -5,14 +5,14 @@
     color="secondary"
     dark
     shrink-on-scroll
-    src="https://picsum.photos/1920/1080?random"
+    :src="appBarFlagCountryDetails.flagImg"
     prominent
     loader-height="4"
   >
     <template v-slot:img="{ props }">
       <v-img
         v-bind="props"
-        gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.95)"
       ></v-img>
     </template>
 
@@ -23,6 +23,10 @@
     >
       TERRIS
     </v-toolbar-title>
+
+    <h2 class="title align-self-end pb-2 pl-4">
+      {{ appBarFlagCountryDetails.name }}
+    </h2>
 
     <v-spacer></v-spacer>
 
@@ -53,11 +57,13 @@
 
 <script>
 import SearchCountryInput from '@/components/SearchCountryInput.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'AppBar',
   components: { SearchCountryInput },
   computed: {
+    ...mapState(['appBarFlagCountryDetails']),
     atHome() {
       return this.$route.name === 'home';
     },

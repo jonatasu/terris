@@ -30,24 +30,30 @@ export default {
     this.init();
   },
   methods: {
-    ...mapActions(['addVisitedCountry']),
+    ...mapActions(['addVisitedCountry', 'setAppBarCountryDetails']),
 
     async init() {
-      if (!this.hasStoredCountry) {
+      if (this.hasStoredCountry) {
+        this.country = this.visitedCountries[this.countryCode];
+      } else {
         this.country = await Api.getCountryByName(this.countryOfficialName);
 
-        if (Object.keys(this.country).length) {
-          const storeCountry = {
-            code: this.country.ccn3,
-            info: this.country,
-          };
-          this.addVisitedCountry(storeCountry);
-        } else {
-          this.$router.push({ path: '/' });
-        }
-      } else {
-        this.country = this.visitedCountries[this.countryCode];
+        const storeCountry = {
+          code: this.country.ccn3,
+          info: this.country,
+        };
+        this.addVisitedCountry(storeCountry);
       }
+      this.handleAppBarCountryDetails();
+    },
+
+    handleAppBarCountryDetails() {
+      const appBarFlagCountryDetails = {
+        flag: this.country.flag,
+        name: this.country.name.common,
+        flagImg: this.country.flags.svg,
+      };
+      this.setAppBarCountryDetails(appBarFlagCountryDetails);
     },
   },
 };
