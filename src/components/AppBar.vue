@@ -47,21 +47,20 @@
       >
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-    </div>
 
-    <v-btn icon>
-      <v-icon>mdi-brightness-4</v-icon>
-    </v-btn>
+      <DarkModeToggle />
+    </div>
   </v-app-bar>
 </template>
 
 <script>
 import SearchCountryInput from '@/components/SearchCountryInput.vue';
+import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import { mapState } from 'vuex';
 
 export default {
   name: 'AppBar',
-  components: { SearchCountryInput },
+  components: { SearchCountryInput, DarkModeToggle },
   computed: {
     ...mapState(['appBarFlagCountryDetails']),
     atHome() {

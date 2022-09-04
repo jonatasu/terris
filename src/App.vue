@@ -1,6 +1,11 @@
 <template>
-  <v-app id="terris">
+  <v-app
+    id="terris"
+  >
     <AppBar />
+
+    <DarkModeToggle fixed fab small />
+
     <v-main>
       <router-view />
     </v-main>
@@ -9,10 +14,12 @@
 
 <script>
 import AppBar from '@/components/AppBar.vue';
+import DarkModeToggle from '@/components/DarkModeToggle.vue';
 
 export default {
   components: {
     AppBar,
+    DarkModeToggle,
   },
 };
 </script>
