@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import CountryView from '@/views/CountryView.vue';
 
 Vue.use(VueRouter);
 
@@ -12,7 +13,7 @@ const routes = [
   {
     path: '/country/:countryName',
     name: 'country',
-    component: () => import(/* webpackChunkName: "countryView" */ '../views/CountryView.vue'),
+    component: CountryView,
   },
 ];
 
