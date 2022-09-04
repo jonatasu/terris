@@ -6,6 +6,8 @@
     :filled="filled"
     auto-select-first
     cache-items
+    :item-text="getItemText"
+    :item-value="getItemValue"
     @change="item => gotoCountryDetailPage(item)"
   />
 </template>
@@ -36,9 +38,23 @@ export default {
     this.countries = await Api.getAllCountryNames();
   },
   methods: {
-    gotoCountryDetailPage(countryName) {
-      if (countryName) {
-        this.$router.push({ path: `/country/${countryName}` });
+    getItemText(item) {
+      return `${item.flag} ${item.commonName}`;
+    },
+    getItemValue(item) {
+      return `${item.code}_${item.officialName}_${item.commonName}`;
+    },
+    gotoCountryDetailPage(country) {
+      if (country) {
+        const [countryCode, countryOfficialName, countryName] = country.split('_');
+        this.$router.push({
+          name: 'country',
+          params: {
+            countryName,
+            countryCode,
+            countryOfficialName,
+          },
+        });
       }
     },
   },
