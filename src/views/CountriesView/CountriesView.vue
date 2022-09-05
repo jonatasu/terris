@@ -101,23 +101,25 @@ export default {
       return removedDuplicateRegions;
     },
     filteredCountries() {
-      if (this.countries.length) {
-        if (this.filterBy.region.length || !!this.filterBy.name) {
-          let newFilteredList = Object.assign(this.countries, []);
+      if (!this.countries.length) {
+        return [];
+      }
 
-          if (this.filterBy.region.length) {
-            newFilteredList = this.filterCountriesByRegion(newFilteredList);
-          }
-
-          if (this.filterBy.name) {
-            newFilteredList = this.filterCountriesByName(newFilteredList);
-          }
-
-          return newFilteredList;
-        }
+      if (!this.filterBy.region.length && !this.filterBy.name) {
         return this.countries;
       }
-      return [];
+
+      let newFilteredList = Object.assign(this.countries, []);
+
+      if (this.filterBy.region.length) {
+        newFilteredList = this.filterCountriesByRegion(newFilteredList);
+      }
+
+      if (this.filterBy.name) {
+        newFilteredList = this.filterCountriesByName(newFilteredList);
+      }
+
+      return newFilteredList;
     },
   },
   data: () => ({
@@ -189,7 +191,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>
