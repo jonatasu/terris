@@ -13,15 +13,21 @@ const sortObjListByKey = (objList, key) => objList.sort((a, b) => {
 });
 
 export const getAllCountryNames = async () => {
-  const { data } = await countriesApi.get('all?fields=name,ccn3,flag');
-  const countryNameList = data.map((country) => (
-    {
-      code: country.ccn3,
-      flag: country.flag,
-      commonName: country.name.common,
-      officialName: country.name.official,
-    }
-  ));
+  const { data } = await countriesApi.get('all?fields=name,ccn3,flag,flags,region');
+  const countryNameList = data.map((country) => {
+    const {
+      ccn3, flag, flags, name, region,
+    } = country;
+
+    return {
+      code: ccn3,
+      flag,
+      flags,
+      commonName: name.common,
+      officialName: name.official,
+      region,
+    };
+  });
   return sortObjListByKey(countryNameList, 'commonName');
 };
 

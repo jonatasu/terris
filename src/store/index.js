@@ -13,6 +13,7 @@ export default new Vuex.Store({
       name: '',
       flagImg: '',
     },
+    storedRegions: [],
     darkMode: false,
   },
   getters: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     setAppBarCountryDetails(state, payload) {
       state.appBarFlagCountryDetails = payload;
+    },
+    setRegions(state, payload) {
+      state.storedRegions = payload;
     },
     toggleDarkMode(state) {
       state.darkMode = !state.darkMode;
@@ -36,6 +40,9 @@ export default new Vuex.Store({
     },
     setAppBarCountryDetails({ commit }, payload) {
       commit('setAppBarCountryDetails', payload);
+    },
+    setRegions({ commit }, payload) {
+      commit('setRegions', payload);
     },
     toggleDarkMode({ commit }) {
       commit('toggleDarkMode');
