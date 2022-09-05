@@ -19,7 +19,7 @@ export default new Vuetify({
         secondary: '#272838',
         accent: '#C9F9FF',
         error: colors.red.accent3,
-        background: colors.indigo.lighten5,
+        background: '#F8F9FB',
       },
       dark: {
         primary: colors.blue.lighten3,
