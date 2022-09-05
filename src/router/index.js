@@ -19,10 +19,16 @@ const routes = [
     path: '/country/:countryName',
     name: 'country',
     component: CountryDetailsView,
+    async beforeRouteUpdate(to, from) {
+      // react to route changes...
+      console.log(to, from);
+      // this.userData = await fetchUser(to.params.id);
+    },
   },
 ];
 
 const router = new VueRouter({
+  mode: 'hash',
   routes,
 });
 

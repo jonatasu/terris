@@ -1,10 +1,16 @@
 <template>
   <v-container v-if="country" class="country">
     <v-row class="pt-5">
-      <v-col cols="8">
+      <v-col
+        cols="12"
+        sm="8"
+      >
         <h2 class="mb-3">{{ country.name.official }} ({{ country.cca2 }})</h2>
         <v-row class="mb-3">
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <CountryInfoCard
               icon-name="continent"
               info-content-type="list"
@@ -20,7 +26,10 @@
               :info-content="getPopulation"
             />
           </v-col>
-          <v-col cols="6">
+          <v-col
+            cols="12"
+            sm="6"
+          >
             <CountryInfoCard
               icon-name="capital"
               info-content-type="list"
@@ -38,7 +47,10 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="4">
+      <v-col
+        cols="12"
+        sm="4"
+      >
         <v-btn
           color="primary"
           class="mb-3"
@@ -50,7 +62,7 @@
           <v-icon left large dense class="mr-3">
             mdi-google-maps
           </v-icon>
-          Open on Google Maps
+          Google Maps
           <v-icon class="ml-3" x-small right>
             mdi-open-in-new
           </v-icon>
@@ -63,9 +75,12 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-divider></v-divider>
+
     <blockquote
       v-if="country.unMember"
-      class="d-flex align-center justify-center px-sm-5 mb-5"
+      class="d-flex align-center justify-center px-sm-5 my-5"
     >
       <v-img
         :src="require('@/assets/icons/united-nations.png')"
@@ -73,15 +88,18 @@
         max-height="50"
       />
       <p class="title font-weight-medium mb-0 ml-3">
-        This country is a member of the United Nations
+        {{ country.name.common }} is a member of the United Nations
       </p>
     </blockquote>
+
+    <v-divider></v-divider>
+
     <v-flex
       v-if="borderCountries.length"
       class="mx-5 pt-5"
     >
       <h3 class="mb-3">Countries that share a border with {{ country.name.common }}:</h3>
-      <v-row class="justify-center">
+      <v-row>
         <v-col
           v-for="borderCountry in borderCountries"
           :key="`border_country_${borderCountry.code}`"
@@ -122,8 +140,14 @@ export default {
     countryOfficialName() {
       return this.$route.params.countryOfficialName;
     },
+    nameOnRoutePath() {
+      return this.$route.path.split('/')[2];
+    },
     hasStoredCountry() {
-      return !!this.visitedCountries[this.countryCode];
+      const visitedCountriesNames = Object.values(this.visitedCountries)
+        .map((country) => country.name.common);
+      return !!this.visitedCountries[this.countryCode]
+        || visitedCountriesNames.includes(this.nameOnRoutePath);
     },
     getCurrencies() {
       const currenciesList = Object.values(this.country.currencies);
@@ -152,17 +176,27 @@ export default {
     country: {
       deep: true,
       async handler(newValue) {
-        const appBarFlagCountryDetails = {
-          flag: newValue.flag,
-          name: newValue.name.common,
-          flagImg: newValue.flags.svg,
-        };
-        this.setAppBarCountryDetails(appBarFlagCountryDetails);
+        if (newValue) {
+          const appBarFlagCountryDetails = {
+            flag: newValue.flag,
+            name: newValue.name.common,
+            flagImg: newValue.flags.svg,
+          };
+          this.setAppBarCountryDetails(appBarFlagCountryDetails);
 
-        if ('borders' in newValue) {
-          const borders = newValue.borders.join(',');
-          const response = await Api.getCountryByCode(borders);
-          this.borderCountries = response;
+          if ('borders' in newValue) {
+            const borders = newValue.borders.join(',');
+            const response = await Api.getCountryByCode(borders);
+            this.borderCountries = response;
+          }
+        }
+      },
+    },
+    $route: {
+      deep: true,
+      handler(newRoute, oldRoute) {
+        if (newRoute.path !== oldRoute.path) {
+          this.init();
         }
       },
     },
@@ -178,10 +212,11 @@ export default {
     },
 
     async getCountryData() {
-      if (this.hasStoredCountry) {
+      if (this.hasStoredCountry && this.countryCode) {
         this.country = this.visitedCountries[this.countryCode];
       } else {
-        this.country = await Api.getCountryByName(this.countryOfficialName);
+        const name = this.countryOfficialName || this.nameOnRoutePath;
+        this.country = await Api.getCountryByName(name);
 
         const storeCountry = {
           code: this.country.ccn3,
