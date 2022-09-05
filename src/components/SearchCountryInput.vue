@@ -35,7 +35,7 @@ export default {
     countries: [],
   }),
   async beforeMount() {
-    this.countries = await Api.getAllCountryNames();
+    this.countries = await Api.getAllCountry();
   },
   methods: {
     getItemText(item) {

@@ -73,7 +73,7 @@
 <script>
 import * as Api from '@/service';
 import { mapState, mapActions } from 'vuex';
-import CountryCard from './components/CountryCard.vue';
+import CountryCard from '@/components/CountryCard.vue';
 
 export default {
   name: 'CountriesView',
@@ -139,7 +139,7 @@ export default {
     },
   },
   async beforeMount() {
-    this.countries = await Api.getAllCountryNames();
+    this.countries = await Api.getAllCountry();
   },
   mounted() {
     this.init();
