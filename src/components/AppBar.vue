@@ -1,38 +1,36 @@
 <template>
   <v-app-bar
-    v-if="!atHome"
+    v-if="atCountryDetail || atCountries"
     app
     color="secondary"
     dark
-    shrink-on-scroll
-    :src="appBarFlagCountryDetails.flagImg"
-    prominent
-    loader-height="4"
-    extension-height="100"
+    :shrink-on-scroll="atCountryDetail"
+    :src="atCountryDetail ? appBarFlagCountryDetails.flagImg : ''"
+    :prominent="atCountryDetail"
   >
     <template v-slot:img="{ props }">
       <v-img
         v-bind="props"
-        gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.95)"
+        gradient="to top right, rgba(19,84,122,.7), rgba(128,208,199,.9)"
       ></v-img>
     </template>
 
     <v-toolbar-title
-      class="app-bar-logo-frame overflow-hidden rounded-xl pa-0"
+      :class="`app-bar-logo-frame overflow-hidden rounded-xl pa-0${appBarLogoCountries}`"
       title="Go to homepage"
       @click="$router.push('/')"
     >
       <img
         :src="require($vuetify.theme.dark
-        ? '../assets/logo/DarkMode-AppBar.jpg'
-        : '../assets/logo/LightMode-AppBar.jpg')"
+        ? '@/assets/logo/DarkMode-AppBar.jpg'
+        : '@/assets/logo/LightMode-AppBar.jpg')"
         alt="TERRIS logo"
         class="app-bar-logo"
       />
     </v-toolbar-title>
 
     <h2 class="title align-self-end mb-2 pl-4">
-      {{ appBarFlagCountryDetails.flag }} {{ appBarFlagCountryDetails.name }}
+      {{ titleContent }}
     </h2>
 
     <v-spacer></v-spacer>
@@ -42,12 +40,12 @@
       class="search-box"
     >
       <SearchCountryInput
-        v-if="loadSearchCountryInput"
+        v-if="loadSearchCountryInput && !atCountries"
         v-show="showSearchCountryInput"
         filled
       />
       <v-btn
-        v-if="!atHome"
+        v-if="atCountryDetail"
         icon
         class="ml-3"
         @click="handleSearchCountryInput"
@@ -72,6 +70,25 @@ export default {
     ...mapState(['appBarFlagCountryDetails']),
     atHome() {
       return this.$route.name === 'home';
+    },
+    atCountries() {
+      return this.$route.name === 'countries';
+    },
+    atCountryDetail() {
+      return this.$route.name === 'country';
+    },
+    titleContent() {
+      if (this.atCountryDetail) {
+        return `${this.appBarFlagCountryDetails.name} ${this.appBarFlagCountryDetails.flag}`;
+      }
+
+      return 'TERRIS';
+    },
+    appBarLogoCountries() {
+      if (this.atCountries) {
+        return ' app-bar-frame--at-countries';
+      }
+      return '';
     },
   },
   data: () => ({
@@ -111,6 +128,11 @@ $logo-small-size: 45px;
     width: $logo-small-size;
     margin-bottom: 2px;
   }
+}
+.v-toolbar__title.app-bar-logo-frame.app-bar-frame--at-countries {
+  height: $logo-small-size;
+  width: $logo-small-size;
+  margin-bottom: 2px;
 }
 .search-box {
   display: flex;

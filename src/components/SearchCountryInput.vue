@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import * as Api from '../service';
+import * as Api from '@/service';
 
 export default {
   name: 'SearchCountry',
