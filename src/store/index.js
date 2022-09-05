@@ -15,8 +15,7 @@ export default new Vuex.Store({
     },
     storedRegions: [],
     darkMode: false,
-  },
-  getters: {
+    loading: false,
   },
   mutations: {
     addVisitedCountry(state, payload) {
@@ -27,6 +26,9 @@ export default new Vuex.Store({
     },
     setRegions(state, payload) {
       state.storedRegions = payload;
+    },
+    setLoading(state, payload) {
+      state.loading = payload;
     },
     toggleDarkMode(state) {
       state.darkMode = !state.darkMode;
@@ -44,10 +46,11 @@ export default new Vuex.Store({
     setRegions({ commit }, payload) {
       commit('setRegions', payload);
     },
+    setLoading({ commit }, payload) {
+      commit('setLoading', payload);
+    },
     toggleDarkMode({ commit }) {
       commit('toggleDarkMode');
     },
-  },
-  modules: {
   },
 });

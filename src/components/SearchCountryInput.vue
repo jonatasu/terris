@@ -35,7 +35,11 @@ export default {
     countries: [],
   }),
   async beforeMount() {
-    this.countries = await Api.getAllCountry();
+    await Api.getAllCountry()
+      .then((response) => {
+        this.countries = response;
+      })
+      .catch((err) => console.error(`This is the ERROR: ${err}`));
   },
   methods: {
     getItemText(item) {

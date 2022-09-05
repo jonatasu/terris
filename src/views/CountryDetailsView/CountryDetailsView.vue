@@ -17,11 +17,13 @@
               :info-content="getContinent"
             />
             <CountryInfoCard
+              v-if="getCurrencies"
               icon-name="currency"
               info-content-type="list"
               :info-content="getCurrencies"
             />
             <CountryInfoCard
+              v-if="getPopulation"
               icon-name="population"
               :info-content="getPopulation"
             />
@@ -31,6 +33,7 @@
             sm="6"
           >
             <CountryInfoCard
+              v-if="'capital' in country"
               icon-name="capital"
               info-content-type="list"
               :info-content="country.capital"
@@ -150,10 +153,13 @@ export default {
         || visitedCountriesNames.includes(this.nameOnRoutePath);
     },
     getCurrencies() {
-      const currenciesList = Object.values(this.country.currencies);
-      return currenciesList.map(
-        (item) => `${item.symbol} - ${item.name}`,
-      );
+      if ('currencies' in this.country) {
+        const currenciesList = Object.values(this.country.currencies);
+        return currenciesList.map(
+          (item) => `${item.symbol} - ${item.name}`,
+        );
+      }
+      return null;
     },
     getContinent() {
       return Object.values(this.country.continents);
@@ -186,8 +192,13 @@ export default {
 
           if ('borders' in newValue) {
             const borders = newValue.borders.join(',');
-            const response = await Api.getCountryByCode(borders);
-            this.borderCountries = response;
+            await Api.getCountryByCode(borders)
+              .then((response) => {
+                this.borderCountries = response;
+              })
+              .catch((err) => {
+                console.error(`The ERROR is: ${err}`);
+              });
           }
         }
       },
@@ -216,7 +227,13 @@ export default {
         this.country = this.visitedCountries[this.countryCode];
       } else {
         const name = this.countryOfficialName || this.nameOnRoutePath;
-        this.country = await Api.getCountryByName(name);
+        await Api.getCountryByName(name)
+          .then((response) => {
+            this.country = response;
+          })
+          .catch((err) => {
+            console.error(`The ERROR is: ${err}`);
+          });
 
         const storeCountry = {
           code: this.country.ccn3,
