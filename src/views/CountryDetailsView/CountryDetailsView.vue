@@ -192,8 +192,13 @@ export default {
 
           if ('borders' in newValue) {
             const borders = newValue.borders.join(',');
-            const response = await Api.getCountryByCode(borders);
-            this.borderCountries = response;
+            await Api.getCountryByCode(borders)
+              .then((response) => {
+                this.borderCountries = response;
+              })
+              .catch((err) => {
+                console.error(`The ERROR is: ${err}`);
+              });
           }
         }
       },
@@ -222,7 +227,13 @@ export default {
         this.country = this.visitedCountries[this.countryCode];
       } else {
         const name = this.countryOfficialName || this.nameOnRoutePath;
-        this.country = await Api.getCountryByName(name);
+        await Api.getCountryByName(name)
+          .then((response) => {
+            this.country = response;
+          })
+          .catch((err) => {
+            console.error(`The ERROR is: ${err}`);
+          });
 
         const storeCountry = {
           code: this.country.ccn3,

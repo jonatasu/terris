@@ -78,17 +78,14 @@ export default {
       return this.$route.name === 'country';
     },
     titleContent() {
-      if (this.atCountryDetail) {
-        return `${this.appBarFlagCountryDetails.name} ${this.appBarFlagCountryDetails.flag}`;
-      }
-
-      return 'TERRIS';
+      return this.atCountryDetail
+        ? `${this.appBarFlagCountryDetails.name} ${this.appBarFlagCountryDetails.flag}`
+        : 'TERRIS';
     },
     appBarLogoCountries() {
-      if (this.atCountries) {
-        return ' app-bar-frame--at-countries';
-      }
-      return '';
+      return this.atCountries
+        ? ' app-bar-frame--at-countries'
+        : '';
     },
   },
   data: () => ({

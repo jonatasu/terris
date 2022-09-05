@@ -60,11 +60,9 @@ export default {
   },
   computed: {
     infoAmount() {
-      let amount = 1;
-      if (this.infoContentType === 'list' && this.infoContent.length > 1) {
-        amount = this.infoContent.length;
-      }
-      return amount;
+      return this.infoContentType === 'list' && this.infoContent.length > 1
+        ? this.infoContent.length
+        : 1;
     },
   },
 };
