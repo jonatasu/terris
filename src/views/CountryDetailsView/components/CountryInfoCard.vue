@@ -16,7 +16,7 @@
       <v-img
         v-if="iconName"
         class="align-self-start"
-        :src="require(`../assets/icons/${iconName}.svg`)"
+        :src="require(`@/assets/icons/${iconName}.svg`)"
         max-width="50"
         max-height="50"
       />

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import CountryView from '@/views/CountryView.vue';
+import CountryDetailsView from '@/views/CountryDetailsView/CountryDetailsView.vue';
 
 Vue.use(VueRouter);
 
@@ -8,12 +8,17 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "homeView" */ '../views/HomeView.vue'),
+    component: () => import(/* webpackChunkName: "homeView" */ '../views/HomeView/HomeView.vue'),
+  },
+  {
+    path: '/countries',
+    name: 'countries',
+    component: () => import(/* webpackChunkName: "countriesView" */ '../views/CountriesView/CountriesView.vue'),
   },
   {
     path: '/country/:countryName',
     name: 'country',
-    component: CountryView,
+    component: CountryDetailsView,
   },
 ];
 

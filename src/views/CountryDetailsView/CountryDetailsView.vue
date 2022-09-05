@@ -82,10 +82,10 @@
 <script>
 import * as Api from '@/service';
 import { mapState, mapActions } from 'vuex';
-import CountryInfoCard from '@/components/CountryInfoCard.vue';
+import CountryInfoCard from './components/CountryInfoCard.vue';
 
 export default {
-  name: 'CountryView',
+  name: 'CountryDetailsView',
   components: {
     CountryInfoCard,
   },

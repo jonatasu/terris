@@ -10,8 +10,8 @@
         <v-flex class="d-flex overflow-hidden rounded-xl mb-5">
           <v-img
             :src="require($vuetify.theme.dark
-            ? '../assets/logo/DarkMode-V2-cropped.jpg'
-            : '../assets/logo/LightMode-V2-cropped.jpg')"
+            ? '@/assets/logo/DarkMode-V2-cropped.jpg'
+            : '@/assets/logo/LightMode-V2-cropped.jpg')"
             alt="TERRIS"
             max-width="500"
             width="100%"
