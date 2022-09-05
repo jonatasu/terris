@@ -8,7 +8,10 @@
       :src="flag"
       width="100%"
       :alt="`flag of ${officialName}`"
+      contain
     />
+
+    <v-divider />
 
     <v-card-title>
       {{ commonName }}
