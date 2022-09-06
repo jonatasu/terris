@@ -191,14 +191,7 @@ export default {
           this.setAppBarCountryDetails(appBarFlagCountryDetails);
 
           if ('borders' in newValue) {
-            const borders = newValue.borders.join(',');
-            await Api.getCountryByCode(borders)
-              .then((response) => {
-                this.borderCountries = response;
-              })
-              .catch((err) => {
-                console.error(`The ERROR is: ${err}`);
-              });
+            this.getBorderCountries(newValue.borders);
           }
         }
       },
@@ -243,8 +236,15 @@ export default {
       }
     },
 
-    getBorderCountries(borders) {
-      return Api.getCountryByCode(borders).then((response) => response);
+    async getBorderCountries(rawBorders) {
+      const borders = rawBorders.join(',');
+      await Api.getCountryByCode(borders)
+        .then((response) => {
+          this.borderCountries = response;
+        })
+        .catch((err) => {
+          console.error(`The ERROR is: ${err}`);
+        });
     },
 
     gotoGoogleMaps() {
