@@ -29,8 +29,19 @@
 
       <v-divider></v-divider>
 
-      <v-card-text class="white--text">
-        {{ getYear }} — <strong>Jônatas F. Vieira</strong>
+      <v-card-text class="d-flex justify-center white--text align-center">
+        <p class="mb-0 px-4">{{ getYear }}</p>
+         —
+        <v-btn
+          text
+          color="primary"
+          @click="window.open('https://linktr.ee/jonatasu')"
+        >
+          JowCodes
+          <v-icon class="ml-1" x-small right>
+            mdi-open-in-new
+          </v-icon>
+        </v-btn>
       </v-card-text>
     </v-card>
   </v-footer>
