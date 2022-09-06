@@ -29,3 +29,9 @@ Bibliotecas usadas no desenvolvimento de funcionalidades, sem muita relaÃ§Ã£
 ## Rest API
 
 - [REST Countries](https://restcountries.com/#api-endpoints-v3)
+
+## Deploy / Hosting
+
+- [Netlify](https://www.netlify.com/)
+
+You can access the project through this **[link](https://terris.netlify.app/)**.
