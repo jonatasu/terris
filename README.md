@@ -1,5 +1,9 @@
 # TERRIS
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a2865894-032c-4e64-a01d-36dbb1f06204/deploy-status)](https://app.netlify.com/sites/terris/deploys)
+
+Access **[TERRIS App](https://terris.netlify.app/)** 
+
 **FYI:** Terris means countries in Latin.
 
 The porpouse of this project is to help people find details about any country in the world.
