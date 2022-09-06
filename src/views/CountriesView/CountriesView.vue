@@ -180,7 +180,7 @@ export default {
     },
     filterCountriesByName(list) {
       return list.filter(
-        (country) => country.commonName.toLowerCase().includes(this.filterBy.name),
+        (country) => country.commonName.toLowerCase().includes(this.filterBy.name.toLowerCase()),
       );
     },
     filterCountriesByRegion(list) {
