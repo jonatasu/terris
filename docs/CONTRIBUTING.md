@@ -6,7 +6,7 @@
 
 ### Folder structure
 
-```json
+```
 ├── dist
 ├── docs // Documentation
 ├── node_modules
@@ -71,3 +71,17 @@ Extension suggestion for VS Code:
 ## Scripts
 
 Generally speaking, the scripts in package.json are intuitive.
+
+## Conventional commits
+
+The Conventional Commits specification is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history; which makes it easier to write automated tools on top of. This convention dovetails with [SemVer](http://semver.org/), by describing the features, fixes, and breaking changes made in commit messages.
+
+- [Official documentation]https://www.conventionalcommits.org/en/v1.0.0/
+
+Examples:
+
+```sh
+feat(lang): add Polish language
+```
+
+[More examples](https://www.conventionalcommits.org/en/v1.0.0/#examples)
