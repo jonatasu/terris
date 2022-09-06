@@ -1,6 +1,6 @@
 # Refinement
 
-Sobre o nome escolhido para a aplicação, busquei no latim qual é palavra que significa "Países", por isso o nome escolhido foi **Terris**.
+About the name chosen for the application, I searched in Latin what is the word that means "Countries", so the name chosen was **Terris**.
 
 ## Views
 
