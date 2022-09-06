@@ -66,6 +66,11 @@
           />
         </v-col>
       </v-row>
+      <v-row v-if="loading">
+        <v-col>
+          <ProgressCircular />
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -74,11 +79,13 @@
 import * as Api from '@/service';
 import { mapState, mapActions } from 'vuex';
 import CountryCard from '@/components/CountryCard.vue';
+import ProgressCircular from '@/components/ProgressCircular.vue';
 
 export default {
   name: 'CountriesView',
   components: {
     CountryCard,
+    ProgressCircular,
   },
   computed: {
     ...mapState(['storedRegions']),
