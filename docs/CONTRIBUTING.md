@@ -6,8 +6,9 @@
 
 ### Folder structure
 
+```json
 ├── dist
-├── docs ... (*Documentation*)
+├── docs // Documentation
 ├── node_modules
 ├── public
 │   ├── img
@@ -15,14 +16,15 @@
 │   ├── assets
 │   │   ├── icons
 │   │   ├── logo
-│   ├── components ... (*Components at a global level*)
-│   ├── plugins ... (*Vue Plugins, such as Vuetify*)
-│   ├── router ... (*Vue Router*)
-│   ├── service ... (*API Requests*)
-│   ├── store ... (*Vuex*)
+│   ├── components // Components at a global level
+│   ├── plugins // Vue Plugins, such as Vuetify
+│   ├── router // Vue Router
+│   ├── service // API Requests
+│   ├── store // Vuex
 │   ├── views
 │   │   ├── View
-│   │   │   ├── components ... (*Components at a View level*)
+│   │   │   ├── components // Components at a View level
+```
 
 ### Vuex
 
