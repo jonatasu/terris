@@ -14,6 +14,9 @@ const routes = [
     path: '/countries',
     name: 'countries',
     component: () => import(/* webpackChunkName: "countriesView" */ '../views/CountriesView/CountriesView.vue'),
+    meta: {
+      title: 'Countries | TERRIS',
+    },
   },
   {
     path: '/country/:countryName',
@@ -25,6 +28,17 @@ const routes = [
 const router = new VueRouter({
   mode: 'hash',
   routes,
+});
+
+const DEFAULT_TITLE = 'TERRIS';
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    document.title = (
+      to.name === 'country'
+        ? `${to.params.countryName} | ${DEFAULT_TITLE}`
+        : to.meta.title)
+      || DEFAULT_TITLE;
+  });
 });
 
 export default router;
