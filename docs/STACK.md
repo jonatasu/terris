@@ -6,7 +6,7 @@ New to the project? Please take the time and consult the documentation for the l
 
 ## Macro View
 
-Os principais componentes da stack sÃ£o:
+Main component of the stack:
 
 - [Vue.js](https://vuejs.org/)
 
@@ -14,7 +14,7 @@ The backend being consumed is a free REST API: [REST Countries v3](https://restc
 
 ## Libraries
 
-Bibliotecas usadas no desenvolvimento de funcionalidades, sem muita relaÃ§Ã£o com a infraestrutura.
+Libraries used in the development of features, without much relation to the infrastructure.
 
 - [Vuetify](https://vuetifyjs.com/)
 - [Axios](https://axios-http.com/docs/intro)
